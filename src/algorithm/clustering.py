@@ -23,3 +23,7 @@ class ClusteringModel:
         return TwoDArray(
             data()[np.random.choice(data().shape[0], num_clusters, replace=False)]
         )
+
+    @staticmethod
+    def get_distance(x: OneDArray[DataT], y: OneDArray[DataT]) -> float:
+        return np.linalg.norm(x() - y())

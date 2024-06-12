@@ -5,7 +5,7 @@ import numpy as np
 import numpy.testing as nptest
 
 from src.algorithm.clustering import ClusteringModel
-from src.types import TwoDArray
+from src.types import TwoDArray, OneDArray
 
 np.random.seed(1)
 
@@ -40,3 +40,14 @@ class TestClusteringModel(unittest.TestCase):
 
         self.assertEqual(model.num_clusters, num_clusters)
         self.assertNotEqual(model.cluster_centers, None)
+
+    def test_get_distance(self) -> None:
+        expected: float = np.sqrt(
+            (1 - 3) ** 2 + (4 - 5) ** 2 + (6 - 1) ** 2 + (1 - 4) ** 2
+        )
+
+        result: float = ClusteringModel.get_distance(
+            OneDArray(TEST_TWO_D_ARR()[0]), OneDArray(TEST_TWO_D_ARR()[1])
+        )
+
+        self.assertEqual(expected, result)
