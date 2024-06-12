@@ -10,7 +10,7 @@
   ],
   "latex-workshop.latex.autoClean.run": "onBuilt",
   "latex-workshop.latex.clean.subfolder.enabled": true,
-  "python.testing.unittestArgs": ["-v", "-s", "./src/test", "-p", "test_*.py"],
+  "python.testing.unittestArgs": ["-v", "-s", "./test", "-p", "test_*.py"],
   "python.testing.pytestEnabled": false,
   "python.testing.unittestEnabled": true
 }
