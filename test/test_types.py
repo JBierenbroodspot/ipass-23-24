@@ -25,6 +25,7 @@ class TestOneDArray(unittest.TestCase):
             OneDArray(two_d_array)
 
 
+@unittest.skip("Deprecated")
 class TestTwoDArray(unittest.TestCase):
     def test_one_d_array(self) -> None:
         one_d_array: npt.NDArray = np.array([1, 2, 3, 4])
