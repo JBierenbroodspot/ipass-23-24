@@ -26,7 +26,7 @@ class TestClusteringModel(unittest.TestCase):
     def setUp(self) -> None:
         self.num_clusters = 2
         self.model = ClusteringModel(TEST_ARR, self.num_clusters)
-        self.model.cluster_centers = np.array([[1, 5, 0, 1], [8, 1, 4, 6]])
+        self.model.cluster_centers = np.array([[3, 5, 1, 4], [8, 1, 4, 6]])
 
     def test_get_random_cluster_centers(self) -> None:
         result: npt.NDArray[np.int64] = self.model.get_random_cluster_centers(
@@ -50,13 +50,28 @@ class TestClusteringModel(unittest.TestCase):
         self.assertEqual(self.model.num_clusters, self.num_clusters)
         self.assertEqual(len(self.model.cluster_centers), self.num_clusters)
 
-    def test_get_distance_vector_to_vector(self) -> None:
-        expected: float = np.sqrt(
-            (1 - 3) ** 2 + (4 - 5) ** 2 + (6 - 1) ** 2 + (1 - 4) ** 2
+    def test_get_distance(self) -> None:
+        expected: npt.NDArray[np.float64] = np.array(
+            [np.sqrt((1 - 3) ** 2 + (4 - 5) ** 2 + (6 - 1) ** 2 + (1 - 4) ** 2)]
         )
 
-        result: npt.NDArray[np.float64] = ClusteringModel[np.int64].get_distance(
+        result: npt.NDArray[np.float64] = self.model.get_distance(
             TEST_ARR[0], TEST_ARR[1]
         )
 
-        self.assertEqual(expected, result)
+        nptest.assert_array_equal(expected, result)
+        np.ndarray
+
+        expected = np.array(
+            [
+                np.sqrt((1 - 3) ** 2 + (4 - 5) ** 2 + (6 - 1) ** 2 + (1 - 4) ** 2),
+                np.sqrt((3 - 3) ** 2 + (5 - 5) ** 2 + (1 - 1) ** 2 + (4 - 4) ** 2),
+                np.sqrt((1 - 3) ** 2 + (5 - 5) ** 2 + (0 - 1) ** 2 + (1 - 4) ** 2),
+                np.sqrt((8 - 3) ** 2 + (1 - 5) ** 2 + (4 - 1) ** 2 + (6 - 4) ** 2),
+                np.sqrt((9 - 3) ** 2 + (9 - 5) ** 2 + (9 - 1) ** 2 + (9 - 4) ** 2),
+            ]
+        )
+
+        result = self.model.get_distance(TEST_ARR, self.model.cluster_centers[0])
+
+        nptest.assert_array_equal(expected, result)
