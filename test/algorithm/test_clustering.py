@@ -1,4 +1,7 @@
 import unittest
+import sys
+
+sys.path.append("./")
 
 import numpy as np
 import numpy.typing as npt
@@ -73,5 +76,12 @@ class TestClusteringModel(unittest.TestCase):
         )
 
         result = self.model.get_distance(TEST_ARR, self.model.cluster_centers[0])
+
+        nptest.assert_array_equal(expected, result)
+
+    def test_get_closest_centers(self) -> None:
+        expected: npt.NDArray[np.int64] = np.array([0, 0, 0, 1, 1])
+
+        result: npt.NDArray[np.int64] = self.model.get_closest_centers(TEST_ARR)
 
         nptest.assert_array_equal(expected, result)

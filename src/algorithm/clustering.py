@@ -30,3 +30,11 @@ class ClusteringModel[DataT: Any]:
             return np.array(np.linalg.norm(X - y))
 
         return np.array([np.linalg.norm(arr - y) for arr in X])
+
+    def get_closest_centers(self, data: npt.NDArray[DataT]) -> npt.NDArray[np.int64]:
+        return np.array(
+            [
+                np.argmin(self.get_distance(self.cluster_centers, vector))
+                for vector in data
+            ]
+        )
