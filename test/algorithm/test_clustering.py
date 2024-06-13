@@ -85,3 +85,17 @@ class TestClusteringModel(unittest.TestCase):
         result: npt.NDArray[np.int64] = self.model.get_closest_centers(TEST_ARR)
 
         nptest.assert_array_equal(expected, result)
+
+    def test_get_centers_of_mass(self) -> None:
+        expected: npt.NDArray[np.float64] = np.array(
+            [
+                [5 / 3, 14 / 3, 7 / 3, 6 / 3],
+                [17 / 2, 10 / 2, 13 / 2, 15 / 2],
+            ]
+        )
+
+        result: npt.NDArray[np.float64] = self.model.get_centers_of_mass(
+            TEST_ARR, np.array([0, 0, 0, 1, 1])
+        )
+
+        nptest.assert_array_almost_equal_nulp(expected, result)

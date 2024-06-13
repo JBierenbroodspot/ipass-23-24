@@ -3,10 +3,6 @@ from typing import Any
 import numpy as np
 import numpy.typing as npt
 
-# from src.types import OneDArray, TwoDArray
-
-# DataT: TypeVar = TypeVar("DataT", *np.ScalarType)
-
 
 class ClusteringModel[DataT: Any]:
     num_clusters: int
@@ -36,5 +32,15 @@ class ClusteringModel[DataT: Any]:
             [
                 np.argmin(self.get_distance(self.cluster_centers, vector))
                 for vector in data
+            ]
+        )
+
+    def get_centers_of_mass(
+        self, data: npt.NDArray[DataT], closest_centers: npt.NDArray[np.int64]
+    ) -> npt.NDArray[np.float64]:
+        return np.array(
+            [
+                np.average(data[closest_centers == i, :], axis=0)
+                for i in range(self.num_clusters)
             ]
         )
