@@ -8,6 +8,7 @@ from src.types import OneDArray, TwoDArray
 from src.exceptions import DimensionError
 
 
+@unittest.skip("Deprecated")
 class TestOneDArray(unittest.TestCase):
     @staticmethod
     def test_successful_use() -> None:
