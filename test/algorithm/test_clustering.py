@@ -26,6 +26,7 @@ class TestClusteringModel(unittest.TestCase):
     def setUp(self) -> None:
         self.num_clusters = 2
         self.model = ClusteringModel(TEST_ARR, self.num_clusters)
+        self.model.cluster_centers = np.array([[1, 5, 0, 1], [8, 1, 4, 6]])
 
     def test_get_random_cluster_centers(self) -> None:
         result: npt.NDArray[np.int64] = self.model.get_random_cluster_centers(
