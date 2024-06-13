@@ -1,16 +1,22 @@
-from typing import Any
+from typing import Any, TypeAlias, Literal
 
 import numpy as np
 import numpy.typing as npt
+
+AlgorithmT: TypeAlias = Literal["lloyds", "none"]
 
 
 class ClusteringModel[DataT: Any]:
     num_clusters: int
     cluster_centers: npt.NDArray[np.float64]
+    method: AlgorithmT
 
-    def __init__(self, data: npt.NDArray[DataT], num_clusters: int) -> None:
+    def __init__(
+        self, data: npt.NDArray[DataT], num_clusters: int, method: AlgorithmT
+    ) -> None:
         self.num_clusters = num_clusters
         self.cluster_centers = self.get_random_cluster_centers(data, num_clusters)
+        self.method = method
 
     @staticmethod
     def get_random_cluster_centers(

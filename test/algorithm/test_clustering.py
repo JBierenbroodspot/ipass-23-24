@@ -28,7 +28,7 @@ class TestClusteringModel(unittest.TestCase):
 
     def setUp(self) -> None:
         self.num_clusters = 2
-        self.model = ClusteringModel(TEST_ARR, self.num_clusters)
+        self.model = ClusteringModel(TEST_ARR, self.num_clusters, "none")
         self.model.cluster_centers = np.array([[3, 5, 1, 4], [8, 1, 4, 6]])
 
     def test_get_random_cluster_centers(self) -> None:
@@ -47,7 +47,7 @@ class TestClusteringModel(unittest.TestCase):
 
         self.num_clusters = 3
         self.model: ClusteringModel[np.int64] = ClusteringModel(
-            TEST_ARR, self.num_clusters
+            TEST_ARR, self.num_clusters, "none"
         )
 
         self.assertEqual(self.model.num_clusters, self.num_clusters)
