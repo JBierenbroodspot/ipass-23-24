@@ -9,8 +9,6 @@ import numpy.testing as nptest
 
 from src.algorithm.clustering import ClusteringModel
 
-np.random.seed(1)
-
 TEST_ARR: npt.NDArray[np.int64] = np.array(
     [
         [1, 4, 6, 1],
@@ -27,9 +25,12 @@ class TestClusteringModel(unittest.TestCase):
     num_clusters: int
 
     def setUp(self) -> None:
+        np.random.seed(13)
+
         self.num_clusters = 2
         self.model = ClusteringModel(TEST_ARR, self.num_clusters, "none")
-        self.model.cluster_centers = np.array([[3, 5, 1, 4], [8, 1, 4, 6]])
+        # Seed 13 causes self.model.cluster_centers to be initially:
+        # [[3, 5, 1, 4], [8, 1, 4, 6]]
 
     def test_get_random_cluster_centers(self) -> None:
         result: npt.NDArray[np.int64] = self.model.get_random_cluster_centers(
@@ -63,7 +64,6 @@ class TestClusteringModel(unittest.TestCase):
         )
 
         nptest.assert_array_equal(expected, result)
-        np.ndarray
 
         expected = np.array(
             [
@@ -80,6 +80,7 @@ class TestClusteringModel(unittest.TestCase):
         nptest.assert_array_equal(expected, result)
 
     def test_get_closest_centers(self) -> None:
+        print(self.model.cluster_centers)
         expected: npt.NDArray[np.int64] = np.array([0, 0, 0, 1, 1])
 
         result: npt.NDArray[np.int64] = self.model.get_closest_centers(TEST_ARR)

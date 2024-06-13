@@ -10,6 +10,7 @@ class ClusteringModel[DataT: Any]:
     num_clusters: int
     cluster_centers: npt.NDArray[np.float64]
     method: AlgorithmT
+    closest_centers: npt.NDArray[np.int64]
 
     def __init__(
         self, data: npt.NDArray[DataT], num_clusters: int, method: AlgorithmT
@@ -50,3 +51,21 @@ class ClusteringModel[DataT: Any]:
                 for i in range(self.num_clusters)
             ]
         )
+
+    def train(self, data: npt.NDArray[DataT]) -> None:
+        self.cluster_centers = self.get_random_cluster_centers(data, self.num_clusters)
+        cluster_centers: npt.NDArray[np.float64]
+
+        self.closest_centers = self.get_closest_centers(data)
+
+        while not (
+            (cluster_centers := self.get_centers_of_mass(data, self.closest_centers))
+            == self.cluster_centers
+        ).all():
+            self.cluster_centers = cluster_centers
+            self.closest_centers = self.get_closest_centers(data)
+
+    def train_step(self, data: npt.NDArray[DataT]) -> None:
+        self.closest_centers = self.get_closest_centers(data)
+        self.cluster_centers = self.get_centers_of_mass(data, self.closest_centers)
+        self.closest_centers = self.get_closest_centers(data)
