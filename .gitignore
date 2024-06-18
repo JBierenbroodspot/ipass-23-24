@@ -314,3 +314,5 @@ TSWLatexianTemp*
 # End of https://www.toptal.com/developers/gitignore/api/latex
 
 __pycache__
+data/*
+!data/cv_cols.csv
