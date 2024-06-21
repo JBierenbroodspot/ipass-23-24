@@ -11,6 +11,7 @@ class ClusteringModel[DataT: Any]:
     cluster_centers: npt.NDArray[np.float64]
     method: AlgorithmT
     closest_centers: npt.NDArray[np.int64]
+    error: np.float64
 
     def __init__(
         self, data: npt.NDArray[DataT], num_clusters: int, method: AlgorithmT
@@ -52,6 +53,18 @@ class ClusteringModel[DataT: Any]:
             ]
         )
 
+    def set_error(self, data: npt.NDArray[DataT]) -> np.float64:
+        center_index: int
+        wcss: np.float64 = np.float64(0)
+
+        for center_index in range(self.num_clusters):
+            subset: npt.NDArray[DataT] = data[self.closest_centers == center_index, :]
+            for data_point in subset:
+                wcss += np.sum((data_point - self.cluster_centers[center_index]) ** 2)
+
+        self.error = wcss
+        return wcss
+
     def train(self, data: npt.NDArray[DataT]) -> None:
         self.cluster_centers = self.get_random_cluster_centers(data, self.num_clusters)
         cluster_centers: npt.NDArray[np.float64]
@@ -64,6 +77,8 @@ class ClusteringModel[DataT: Any]:
         ).all():
             self.cluster_centers = cluster_centers
             self.closest_centers = self.get_closest_centers(data)
+
+        self.set_error(data)
 
     def train_step(self, data: npt.NDArray[DataT]) -> None:
         self.closest_centers = self.get_closest_centers(data)
