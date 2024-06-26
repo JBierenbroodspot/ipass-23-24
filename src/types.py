@@ -1,7 +1,15 @@
+import typing
+
 import numpy as np
 import numpy.typing as npt
 
 from .exceptions import DimensionError
+
+
+class CvLabelData(typing.NamedTuple):
+    cv_index: int
+    num_cols: int
+    alt_num_cols: int
 
 
 class OneDArray[DTypeT: npt.DTypeLike]:

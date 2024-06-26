@@ -9,6 +9,7 @@ jupyter = "*"
 pypdf = "*"
 numpy = "*"
 matplotlib = "*"
+pandas = "*"
 
 [dev-packages]
 
