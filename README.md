@@ -45,30 +45,20 @@ python -m pipenv shell
 
 Alles zou nu gereed moeten zijn voor gebruik.
 
-## Algoritme
+## Notebooks
 
-Het algoritme bestaat uit twee onderdelen: `ClusteringModel` en `Elbow`
+In de Jupyter Notebooks staat veel informatie, waaronder onderbouwingen van
+bepaalde keuzes.
 
-### src/algorithm/clustering.py
-
-In deze module staat het clusteringsmodel `ClusteringModel`. Om deze te 
-gebruiken heb je een 2-dimensionale numpy array nodig.
+## Applicatie
 
 ```py
-example_data = np.array([
-    [1,2,3], 
-    [1,2,3], 
-    [1,2,3],
-])
-
-num_clusters = 2
-
-model = ClusteringModel(example_dataset, num_clusters, "lloyds")
-model.tain(example_data)
-
-model.cluster_centers
-model.error
+python -m main [path/to/pdf/file]
 ```
 
-`ClusteringModel.cluster_centers` geeft de clustercentra terug en 
-`ClusteringModel.error` geeft de score (WCSS) van het model terug.
+## Erkenning
+
+Ik heb de code zelf geschreven tenzij er een bron vermeld staat die naar code 
+wijst.
+Alle docstrings zijn geschreven door OpenAIs ChatGPT 3.5 en gecontroleerd door
+mij.
