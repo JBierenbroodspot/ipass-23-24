@@ -1,3 +1,7 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/vjw3RhLE)
+<img style="float: right;" src="img/HU.svg" alt="Hogeschool Utrecht">
+
+# Individual Propedeuse Assessment - Artificial Intelligence
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Python 3.12.2](https://img.shields.io/badge/Python-3.12.2-green)](https://www.python.org/downloads/release/python-3122/)
