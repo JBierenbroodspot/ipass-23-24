@@ -33,9 +33,7 @@ class TestClusteringModel(unittest.TestCase):
         # [[3, 5, 1, 4], [8, 1, 4, 6]]
 
     def test_get_random_cluster_centers(self) -> None:
-        result: npt.NDArray[np.int64] = self.model.get_random_cluster_centers(
-            TEST_ARR, self.num_clusters
-        )
+        result: npt.NDArray[np.int64] = self.model.get_random_cluster_centers(TEST_ARR, self.num_clusters)
 
         self.assertNotIsInstance(result[1, 1], int)
         self.assertTrue(len(result) == self.num_clusters)
@@ -47,9 +45,7 @@ class TestClusteringModel(unittest.TestCase):
         self.assertEqual(len(self.model.cluster_centers), self.num_clusters)
 
         self.num_clusters = 3
-        self.model: ClusteringModel[np.int64] = ClusteringModel(
-            TEST_ARR, self.num_clusters, "none"
-        )
+        self.model: ClusteringModel[np.int64] = ClusteringModel(TEST_ARR, self.num_clusters, "none")
 
         self.assertEqual(self.model.num_clusters, self.num_clusters)
         self.assertEqual(len(self.model.cluster_centers), self.num_clusters)
@@ -59,9 +55,7 @@ class TestClusteringModel(unittest.TestCase):
             [np.sqrt((1 - 3) ** 2 + (4 - 5) ** 2 + (6 - 1) ** 2 + (1 - 4) ** 2)]
         )
 
-        result: npt.NDArray[np.float64] = self.model.get_distance(
-            TEST_ARR[0], TEST_ARR[1]
-        )
+        result: npt.NDArray[np.float64] = self.model.get_distance(TEST_ARR[0], TEST_ARR[1])
 
         nptest.assert_array_equal(expected, result)
 
@@ -95,8 +89,6 @@ class TestClusteringModel(unittest.TestCase):
             ]
         )
 
-        result: npt.NDArray[np.float64] = self.model.get_centers_of_mass(
-            TEST_ARR, np.array([0, 0, 0, 1, 1])
-        )
+        result: npt.NDArray[np.float64] = self.model.get_centers_of_mass(TEST_ARR, np.array([0, 0, 0, 1, 1]))
 
         nptest.assert_array_almost_equal_nulp(expected, result)

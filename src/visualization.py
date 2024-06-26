@@ -7,11 +7,9 @@ import numpy as np
 import numpy.typing as npt
 
 
-class Subplot[
-    AxT: matplotlib.axes.Axes
-    | list[matplotlib.axes.Axes]
-    | list[list[matplotlib.axes.Axes]]
-](typing.NamedTuple):
+class Subplot[AxT: matplotlib.axes.Axes | list[matplotlib.axes.Axes] | list[list[matplotlib.axes.Axes]]](
+    typing.NamedTuple
+):
     fig: matplotlib.figure.Figure
     ax: AxT
     n_cols: int
@@ -31,9 +29,7 @@ def create_subplot_row(n_cols: int) -> Subplot[list[matplotlib.axes.Axes]]:
     return Subplot(fig, ax, n_cols=n_cols, n_rows=1)
 
 
-def create_subplot_matrix(
-    n_cols: int, n_rows: int
-) -> Subplot[list[list[matplotlib.axes.Axes]]]:
+def create_subplot_matrix(n_cols: int, n_rows: int) -> Subplot[list[list[matplotlib.axes.Axes]]]:
     fig: matplotlib.figure.Figure
     ax: list[list[matplotlib.axes.Axes]]
 
